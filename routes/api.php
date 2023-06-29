@@ -28,6 +28,8 @@ Route::group([
     Route::post('forgot-password', 'App\Http\Controllers\ClientController@forgot_password');
 });
 
+Route::post('add-order', 'App\Http\Controllers\OrderController@addOrder');
+
 Route::group([
     'middleware' => 'auth:api'
 ], function () {
@@ -36,7 +38,6 @@ Route::group([
     Route::get('profile', 'App\Http\Controllers\ClientController@getProfile');
     Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
     Route::get('my-verify', 'App\Http\Controllers\VerifyController@getVerify');
-    Route::post('add-order', 'App\Http\Controllers\OrderController@addOrder');
 });
 
 Route::group([
