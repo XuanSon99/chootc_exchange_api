@@ -28,6 +28,7 @@ Route::group([
     Route::post('forgot-password', 'App\Http\Controllers\ClientController@forgot_password');
 });
 
+Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
 Route::post('add-order', 'App\Http\Controllers\OrderController@addOrder');
 
 Route::group([
