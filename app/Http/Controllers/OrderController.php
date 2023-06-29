@@ -10,6 +10,15 @@ use Validator;
 
 class OrderController extends Controller
 {
+    public function generateKey()
+    {
+        $key = "";
+        for ($x = 1; $x <= 9; $x++) {
+            $key .= random_int(0, 9);
+        }
+        return $key;
+    }
+
     public function index()
     {
         return Order::orderBy('created_at', 'DESC')->paginate(10);
@@ -18,6 +27,8 @@ class OrderController extends Controller
     public function addOrder(Request $request)
     {
         $data = new Order([
+            'code' => $this->generateKey(),
+            'status' => 'processing',
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,

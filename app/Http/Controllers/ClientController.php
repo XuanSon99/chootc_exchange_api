@@ -15,7 +15,7 @@ class ClientController extends Controller
     public function generateKey()
     {
         $key = "";
-        for ($x = 1; $x <= 6; $x++) {
+        for ($x = 1; $x <= 9; $x++) {
             $key .= random_int(0, 9);
         }
         return $key;
