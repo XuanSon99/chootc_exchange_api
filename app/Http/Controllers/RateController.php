@@ -30,7 +30,7 @@ class RateController extends Controller
             'Accept' => 'application/json'
         ])->post($param, $data);
 
-        return $response;
+        return $response->data->data[4]->adv->price;
     }
 
 }

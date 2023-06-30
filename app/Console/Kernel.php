@@ -16,6 +16,34 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            DB::table('assets')->update([
+                'first_column' => 'first_value',
+                // List other columns
+            ]);
+        })->daily();
+    }
+    
+    public function getPrice($asset, $type)
+    {
+        $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
+        
+        $data = [
+            'asset' => $asset,
+            'fiat' => 'vnd',
+            'merchantCheck' => true,
+            'page' => 1,
+            'publisherType' => null,
+            'rows' => 5,
+            'tradeType' => $type,
+        ];
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->post($param, $data);
+
+        return $response;
     }
 
     /**
