@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,11 +19,33 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
-            DB::table('assets')->update([
-                'first_column' => 'first_value',
-                // List other columns
+            DB::table('assets')->where('symbol','=','usdt')->update([
+                'buy_rate' => $this->getPrice('usdt','buy'),
+                'sell_rate' => $this->getPrice('usdt','sell')
             ]);
-        })->daily();
+            DB::table('assets')->where('symbol','=','btc')->update([
+                'buy_rate' => $this->getPrice('btc','buy'),
+                'sell_rate' => $this->getPrice('btc','sell')
+            ]);
+        })->everyTwoMinutes();
+
+        $schedule->call(function () {
+            DB::table('assets')->where('symbol','=','eth')->update([
+                'buy_rate' => $this->getPrice('eth','buy'),
+                'sell_rate' => $this->getPrice('eth','sell')
+            ]);
+            DB::table('assets')->where('symbol','=','busd')->update([
+                'buy_rate' => $this->getPrice('busd','buy'),
+                'sell_rate' => $this->getPrice('busd','sell')
+            ]);
+        })->everyThreeMinutes();
+
+        $schedule->call(function () {
+            DB::table('assets')->where('symbol','=','bnb')->update([
+                'buy_rate' => $this->getPrice('bnb','buy'),
+                'sell_rate' => $this->getPrice('bnb','sell')
+            ]);
+        })->everyFiveMinutes();
     }
     
     public function getPrice($asset, $type)
@@ -43,7 +67,7 @@ class Kernel extends ConsoleKernel
             'Accept' => 'application/json'
         ])->post($param, $data);
 
-        return $response;
+        return $response['data'][4]['adv']['price'];
     }
 
     /**
