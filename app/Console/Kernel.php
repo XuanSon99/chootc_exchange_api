@@ -21,29 +21,34 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             DB::table('assets')->where('symbol','=','usdt')->update([
                 'buy_rate' => $this->getPrice('usdt','buy'),
-                'sell_rate' => $this->getPrice('usdt','sell')
+                'sell_rate' => $this->getPrice('usdt','sell'),
+                "updated_at" => now()
             ]);
         })->cron('*/3 * * * *');
 
         $schedule->call(function () {
             DB::table('assets')->where('symbol','=','eth')->update([
                 'buy_rate' => $this->getPrice('eth','buy'),
-                'sell_rate' => $this->getPrice('eth','sell')
+                'sell_rate' => $this->getPrice('eth','sell'),
+                "updated_at" => now(),
             ]);
             DB::table('assets')->where('symbol','=','busd')->update([
                 'buy_rate' => $this->getPrice('busd','buy'),
-                'sell_rate' => $this->getPrice('busd','sell')
+                'sell_rate' => $this->getPrice('busd','sell'),
+                "updated_at" => now()
             ]);
         })->cron('*/11 * * * *');
 
         $schedule->call(function () {
             DB::table('assets')->where('symbol','=','btc')->update([
                 'buy_rate' => $this->getPrice('btc','buy'),
-                'sell_rate' => $this->getPrice('btc','sell')
+                'sell_rate' => $this->getPrice('btc','sell'),
+                "updated_at" => now()
             ]);
             DB::table('assets')->where('symbol','=','bnb')->update([
                 'buy_rate' => $this->getPrice('bnb','buy'),
-                'sell_rate' => $this->getPrice('bnb','sell')
+                'sell_rate' => $this->getPrice('bnb','sell'),
+                "updated_at" => now()
             ]);
         })->cron('*/19 * * * *');
     }
