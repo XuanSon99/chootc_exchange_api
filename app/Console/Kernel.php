@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
                 'buy_rate' => $this->getPrice('usdt','buy'),
                 'sell_rate' => $this->getPrice('usdt','sell')
             ]);
-        })->cron('3 * * * *');
+        })->cron('*/3 * * * *');
 
         $schedule->call(function () {
             DB::table('assets')->where('symbol','=','eth')->update([
@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
                 'buy_rate' => $this->getPrice('busd','buy'),
                 'sell_rate' => $this->getPrice('busd','sell')
             ]);
-        })->cron('11 * * * *');
+        })->cron('*/11 * * * *');
 
         $schedule->call(function () {
             DB::table('assets')->where('symbol','=','btc')->update([
@@ -45,7 +45,7 @@ class Kernel extends ConsoleKernel
                 'buy_rate' => $this->getPrice('bnb','buy'),
                 'sell_rate' => $this->getPrice('bnb','sell')
             ]);
-        })->cron('19 * * * *');
+        })->cron('*/19 * * * *');
     }
     
     public function getPrice($asset, $type)
