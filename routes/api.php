@@ -30,6 +30,7 @@ Route::group([
 
 Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
 Route::post('add-order', 'App\Http\Controllers\OrderController@addOrder');
+Route::resource('setup', 'App\Http\Controllers\SetupController');
 
 Route::group([
     'middleware' => 'auth:api'

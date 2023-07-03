@@ -30,7 +30,7 @@ class VerifyController extends Controller
         $portrait_photo = $request->file('portrait_photo')->store('public/images');
 
         $data = new Verify([
-            'phone' => $request->phone
+            'phone' => $request->phone,
             'name' => $request->name,
             'front_photo' => str_replace("public", "", $front_photo),
             'back_photo' => str_replace("public", "", $back_photo),
