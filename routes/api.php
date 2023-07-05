@@ -29,6 +29,7 @@ Route::group([
 });
 
 Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
+Route::get('bank', 'App\Http\Controllers\RateController@getBankInfo');
 Route::post('add-order', 'App\Http\Controllers\OrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');

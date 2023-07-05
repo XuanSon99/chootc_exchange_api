@@ -33,4 +33,21 @@ class RateController extends Controller
         return $response;
     }
 
+    public function getBankInfo(Request $request)
+    {
+        $param = 'https://api.vietqr.io/v2/lookup';
+        
+        $data = [
+            'bin' => $request->bin,
+            'accountNumber' => $request->account_number
+        ];
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->post($param, $data);
+
+        return $response;
+    }
+
 }
