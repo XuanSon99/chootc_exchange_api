@@ -43,6 +43,8 @@ class RateController extends Controller
         ];
 
         $response = Http::withHeaders([
+            'x-client-id' => '2de54bd8-8cfe-4a6f-b74b-1d0a4a016a5a', 
+            'x-api-key' => 'a06229fc-1bfa-4e47-b30e-d242354b97cb',
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
         ])->post($param, $data);
