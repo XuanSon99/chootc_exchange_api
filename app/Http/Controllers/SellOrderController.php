@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BuyOrder;
+use App\Models\SellOrder;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class BuyOrderController extends Controller
+class SellOrderController extends Controller
 {
     public function generateKey()
     {
@@ -21,12 +21,12 @@ class BuyOrderController extends Controller
 
     public function index()
     {
-        return BuyOrder::orderBy('created_at', 'DESC')->paginate(10);
+        return SellOrder::orderBy('created_at', 'DESC')->paginate(10);
     }
 
     public function addOrder(Request $request)
     {
-        $data = new BuyOrder([
+        $data = new SellOrder([
             'code' => $this->generateKey(),
             'status' => 1,
             'phone' => $request->phone,
@@ -34,7 +34,10 @@ class BuyOrderController extends Controller
             'amount' => $request->amount,
             'money' => $request->money,
             'network' => $request->network,
-            'address' => $request->address
+            'bank_name' => $request->bank_name,
+            'account_number' => $request->account_number,
+            'owner_name' => $request->owner_name,
+            'txhash' => $request->txhash
         ]);
         $data->save();
 
@@ -43,18 +46,18 @@ class BuyOrderController extends Controller
 
     public function getOrder(Request $request)
     {
-        return BuyOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
+        return SellOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function update(Request $request, BuyOrder $BuyOrder)
+    public function update(Request $request, SellOrder $SellOrder)
     {
-        $BuyOrder->update($request->all());
+        $SellOrder->update($request->all());
         return response()->json(["status" => true], 200);
     }
 
-    public function destroy(BuyOrder $BuyOrder)
+    public function destroy(SellOrder $SellOrder)
     {
-        $BuyOrder->delete();
+        $SellOrder->delete();
         return response()->json(["status" => true], 200);
     }
 }
