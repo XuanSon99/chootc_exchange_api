@@ -37,7 +37,6 @@ class SellOrderController extends Controller
             'bank_name' => $request->bank_name,
             'account_number' => $request->account_number,
             'owner_name' => $request->owner_name,
-            'txhash' => $request->txhash
         ]);
         $data->save();
 
