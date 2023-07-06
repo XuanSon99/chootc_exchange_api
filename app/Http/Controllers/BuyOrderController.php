@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\BuyOrder;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class OrderController extends Controller
+class BuyOrderController extends Controller
 {
     public function generateKey()
     {
@@ -21,12 +21,12 @@ class OrderController extends Controller
 
     public function index()
     {
-        return Order::orderBy('created_at', 'DESC')->paginate(10);
+        return BuyOrder::BuyOrderBy('created_at', 'DESC')->paginate(10);
     }
 
-    public function addOrder(Request $request)
+    public function addBuyOrder(Request $request)
     {
-        $data = new Order([
+        $data = new BuyOrder([
             'code' => $this->generateKey(),
             'status' => 'processing',
             'phone' => $request->phone,
@@ -41,20 +41,20 @@ class OrderController extends Controller
         return response()->json(["status" => true, "data" =>  $data], 201);
     }
 
-    public function getOrder(Request $request)
+    public function getBuyOrder(Request $request)
     {
-        return Order::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
+        return BuyOrder::where("phone", $request->user()->phone)->BuyOrderBy('created_at', 'DESC')->get();
     }
 
-    public function update(Request $request, Order $Order)
+    public function update(Request $request, BuyOrder $BuyOrder)
     {
-        $Order->update($request->all());
+        $BuyOrder->update($request->all());
         return response()->json(["status" => true], 200);
     }
 
-    public function destroy(Order $Order)
+    public function destroy(BuyOrder $BuyOrder)
     {
-        $Order->delete();
+        $BuyOrder->delete();
         return response()->json(["status" => true], 200);
     }
 }

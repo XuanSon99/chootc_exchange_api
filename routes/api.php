@@ -30,7 +30,7 @@ Route::group([
 
 Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
 Route::get('bank', 'App\Http\Controllers\RateController@getBankInfo');
-Route::post('add-order', 'App\Http\Controllers\OrderController@addOrder');
+Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
 
@@ -58,7 +58,7 @@ Route::group([
 
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::resource('verify', 'App\Http\Controllers\VerifyController');
-    Route::resource('order', 'App\Http\Controllers\OrderController');
+    Route::resource('buyOrder', 'App\Http\Controllers\BuyOrderController');
 
     Route::get('user-info/{phone}', 'App\Http\Controllers\VerifyController@getUserInfo');
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
