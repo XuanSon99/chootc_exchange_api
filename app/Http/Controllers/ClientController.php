@@ -29,7 +29,7 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(["status" => false, "message" => ["Số điện thoại đã tồn tại!"]], 400);
+            return response()->json(["status" => false, "message" => ["Số điện thoại đã tồn tại"]], 400);
         }
 
         $user_id = Client::insertGetId([
@@ -46,7 +46,7 @@ class ClientController extends Controller
         //     return response()->json(["status" => false, "message" => ["There were some error when register, please try again."]], 422);
         // }
 
-        return response()->json(["status" => true, "message" => ["Tạo tài khoản thành công!"]], 200);
+        return response()->json(["status" => true, "message" => ["Tạo tài khoản thành công"]], 200);
     }
 
     public function login(Request $request)
@@ -57,13 +57,13 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(["status" => false, "message" => ["Tài khoản không tồn tại!"]], 400);
+            return response()->json(["status" => false, "message" => ["Tài khoản không tồn tại"]], 400);
         }
 
         $user = Client::where("phone", $request->phone)->first();
 
         if (!Hash::check($request->password, $user->password)) {
-            return response()->json(["status" => false, "message" => ["Mật khẩu không đúng!"]], 400);
+            return response()->json(["status" => false, "message" => ["Mật khẩu không đúng"]], 401);
         }
 
         // if (!$user->email_verified_at) {
@@ -149,12 +149,12 @@ class ClientController extends Controller
             'password' => "required",
         ]);
         if (!Hash::check($request->current_password,  $request->user()->password)) {
-            return response()->json(["status" => false, "message" => ["Current Password Invalid!"]], 400);
+            return response()->json(["status" => false, "message" => ["Current Password Invalid"]], 400);
         }
         $request->user()->update([
             "password" => bcrypt($request->password)
         ]);
-        return response()->json(["status" => true, "message" => ["Password changed!"]]);
+        return response()->json(["status" => true, "message" => ["Password changed"]]);
     }
 
     public function getProfile(Request $request)
@@ -166,7 +166,7 @@ class ClientController extends Controller
     {
         $request->user()->token()->revoke();
         return response()->json([
-            'message' => 'Successfully logged out!'
+            'message' => 'Successfully logged out'
         ]);
     }
 
