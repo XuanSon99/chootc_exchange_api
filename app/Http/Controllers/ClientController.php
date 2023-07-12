@@ -40,7 +40,7 @@ class ClientController extends Controller
         }
 
         $data = new Client([
-            'username' => $request->phone,
+            'phone' => $request->phone,
             'password' => bcrypt($request->password),
             'referral' => $request->referral,
             'verify' => 0
