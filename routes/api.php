@@ -45,6 +45,7 @@ Route::group([
     Route::get('my-verify', 'App\Http\Controllers\VerifyController@getVerify');
     Route::get('buy-order', 'App\Http\Controllers\BuyOrderController@getOrder');
     Route::get('sell-order', 'App\Http\Controllers\SellOrderController@getOrder');
+    Route::get('states', 'App\Http\Controllers\StateController@index');
 });
 
 Route::group([

@@ -32,6 +32,7 @@ class SellOrderController extends Controller
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,
+            'rate' => $request->rate,
             'money' => $request->money,
             'network' => $request->network,
             'bank_name' => $request->bank_name,
