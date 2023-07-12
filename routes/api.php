@@ -43,6 +43,8 @@ Route::group([
     Route::get('profile', 'App\Http\Controllers\ClientController@getProfile');
     Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
     Route::get('my-verify', 'App\Http\Controllers\VerifyController@getVerify');
+    Route::get('buy-order', 'App\Http\Controllers\BuyOrderController@getOrder');
+    Route::get('sell-order', 'App\Http\Controllers\SellOrderController@getOrder');
 });
 
 Route::group([

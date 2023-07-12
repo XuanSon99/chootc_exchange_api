@@ -32,12 +32,20 @@ class ClientController extends Controller
             return response()->json(["status" => false, "message" => ["Số điện thoại đã tồn tại"]], 400);
         }
 
-        $user_id = Client::insertGetId([
-            'phone' => $request->phone,
+        if ($request->referral) {
+            $ref = Client::where('phone', '=', $request->referral)->first();
+            if (is_null($ref)) {
+                return response()->json(["status" => false, "message" => ["Mã giới thiệu không chính xác"]], 401);
+            }
+        }
+
+        $data = new Admin([
+            'username' => $request->phone,
             'password' => bcrypt($request->password),
-            "created_at" => now(),
-            "updated_at" => now(),
+            'referral' => $request->referral,
+            'verify' => 0
         ]);
+        $data->save();
 
         // try {
         //     MailController::VERIFY($user_id);
