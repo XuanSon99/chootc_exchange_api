@@ -192,9 +192,9 @@ class ClientController extends Controller
         return response()->json(["status" => true, "data" => $data, "total" => Client::count()]);
     }
 
-    public function update(Request $request, Client $Client)
+    public function updateProfile(Request $request)
     {
-        $Client->update([
+        $request->user()->update([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
