@@ -39,6 +39,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::post('change-password', 'App\Http\Controllers\ClientController@change_password');
+    Route::put('update-profile', 'App\Http\Controllers\ClientController@update');
     Route::get('logout', 'App\Http\Controllers\ClientController@logout');
     Route::get('profile', 'App\Http\Controllers\ClientController@getProfile');
     Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');

@@ -194,11 +194,12 @@ class ClientController extends Controller
 
     public function update(Request $request, Client $Client)
     {
-        if ($request->password) {
-            $Client['password'] = bcrypt($request->password);
-        }
-
-        $Client->update($request->except('password'));
+        $Client->update([
+            'name' => $request->name,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'address' => $request->address
+        ]);
 
         return response()->json(["status" => true], 200);
     }
