@@ -27,14 +27,14 @@ class VerifyController extends Controller
 
         $front_photo = $request->file('front_photo')->store('public/images');
         $back_photo = $request->file('back_photo')->store('public/images');
-        $portrait_photo = $request->file('portrait_photo')->store('public/images');
+        $portrait_video = $request->file('portrait_video')->store('public/video');
 
         $data = new Verify([
+            'ip' => $request->ip,
             'phone' => $request->phone,
-            'name' => $request->name,
             'front_photo' => str_replace("public", "", $front_photo),
             'back_photo' => str_replace("public", "", $back_photo),
-            'portrait_photo' => str_replace("public", "", $portrait_photo) 
+            'portrait_video' => str_replace("public", "", $portrait_video) 
         ]);
         $data->save();
 
