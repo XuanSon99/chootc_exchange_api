@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Verify;
+use App\Models\Client;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,10 @@ class VerifyController extends Controller
         $back_photo = $request->file('back_photo')->store('public/images');
         $portrait_video = $request->file('portrait_video')->store('public/video');
 
+        Client::where("phone", $request->phone)->update([
+            'verify' => 'pending'
+        ]);
+
         $data = new Verify([
             'ip' => $request->ip,
             'phone' => $request->phone,
@@ -37,10 +42,6 @@ class VerifyController extends Controller
             'portrait_video' => str_replace("public", "", $portrait_video) 
         ]);
         $data->save();
-
-        $request->user()->update([
-            'verify' => 'pending'
-        ]);
 
         return response()->json(["status" => true, "data" =>  $data], 201);
     }
