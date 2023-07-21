@@ -26,14 +26,18 @@ class BuyOrderController extends Controller
 
     public function addOrder(Request $request)
     {
+        $rate = $this->getPrice('usdt', 'buy');
+        if (is_null($rate)) {
+            return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
+        }
+
         $data = new BuyOrder([
             'code' => $this->generateKey(),
             'status' => 1,
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,
-            'rate' => $request->rate,
-            'money' => $request->money,
+            'rate' => $rate,
             'network' => $request->network,
             'address' => $request->address
         ]);
@@ -57,5 +61,27 @@ class BuyOrderController extends Controller
     {
         $BuyOrder->delete();
         return response()->json(["status" => true], 200);
+    }
+
+    public function getPrice($asset, $type)
+    {
+        $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
+        
+        $data = [
+            'asset' => $asset,
+            'fiat' => 'vnd',
+            'merchantCheck' => true,
+            'page' => 1,
+            'publisherType' => null,
+            'rows' => 5,
+            'tradeType' => $type,
+        ];
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->post($param, $data);
+
+        return $response['data'][4]['adv']['price'];
     }
 }

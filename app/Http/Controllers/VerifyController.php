@@ -38,6 +38,10 @@ class VerifyController extends Controller
         ]);
         $data->save();
 
+        $request->user()->update([
+            'verify' => 'pending'
+        ]);
+
         return response()->json(["status" => true, "data" =>  $data], 201);
     }
 
