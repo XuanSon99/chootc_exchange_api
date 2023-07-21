@@ -34,6 +34,7 @@ Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
 Route::post('sell-order', 'App\Http\Controllers\SellOrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
+Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
 
 Route::group([
     'middleware' => 'auth:api'
@@ -42,7 +43,6 @@ Route::group([
     Route::post('update-profile', 'App\Http\Controllers\ClientController@updateProfile');
     Route::get('logout', 'App\Http\Controllers\ClientController@logout');
     Route::get('profile', 'App\Http\Controllers\ClientController@getProfile');
-    Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
     Route::get('my-verify', 'App\Http\Controllers\VerifyController@getVerify');
     Route::get('buy-order', 'App\Http\Controllers\BuyOrderController@getOrder');
     Route::get('sell-order', 'App\Http\Controllers\SellOrderController@getOrder');

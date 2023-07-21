@@ -30,9 +30,9 @@ class VerifyController extends Controller
         $back_photo = $request->file('back_photo')->store('public/images');
         $portrait_video = $request->file('portrait_video')->store('public/video');
 
-        // Client::where("phone", $request->phone)->update([
-        //     'verify' => 'pending'
-        // ]);
+        Client::where("phone", $request->phone)->update([
+            'verify' => 'pending'
+        ]);
 
         $data = new Verify([
             'ip' => $request->ip,
