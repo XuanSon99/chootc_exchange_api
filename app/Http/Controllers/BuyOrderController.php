@@ -27,7 +27,18 @@ class BuyOrderController extends Controller
 
     public function addOrder(Request $request)
     {
-        $rate = $this->getPrice('usdt', 'buy');
+        $rate = $this->getPrice($request->token, 'buy');
+
+        if($request->token == 'btc'){
+            $rate = $rate + 5000000;
+        }
+        if($request->token == 'eth'){
+            $rate = $rate + 300000;
+        }
+        if($request->token == 'bnb'){
+            $rate = $rate + 50000;
+        }
+
         if (is_null($rate)) {
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
         }
@@ -38,6 +49,7 @@ class BuyOrderController extends Controller
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,
+            'money' => $rate * $request->amount,
             'rate' => $rate,
             'network' => $request->network,
             'address' => $request->address
