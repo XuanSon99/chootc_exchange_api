@@ -225,6 +225,8 @@ class ClientController extends Controller
         $phone = $request->route('phone');
         $clients = Client::where("phone", $phone)->first();
 
+        return $clients;
+
         $data = [];
         foreach ($clients as $pro) {
             $info = Verify::where("phone", $pro->phone)->first();
