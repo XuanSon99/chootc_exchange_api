@@ -49,7 +49,8 @@ class BuyOrderController extends Controller
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,
-            'money' => $rate * $request->amount,
+            'money' => $rate * $request->amount + $request->fee,
+            'fee' => $request->fee,
             'rate' => $rate,
             'network' => $request->network,
             'address' => $request->address
