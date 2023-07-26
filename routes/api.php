@@ -61,6 +61,7 @@ Route::group([
     'middleware' => 'auth:admin'
 ], function () {
 
+    Route::get('info/{username}', 'App\Http\Controllers\AdminController@getInfo');
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::resource('verify', 'App\Http\Controllers\VerifyController');
     Route::resource('buyOrder', 'App\Http\Controllers\BuyOrderController');

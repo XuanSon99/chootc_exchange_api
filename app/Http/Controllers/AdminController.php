@@ -28,7 +28,8 @@ class AdminController extends Controller
 
         $data = new Admin([
             'username' => $request->username,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'rules' => $request->rules
         ]);
         $data->save();
 
@@ -82,5 +83,12 @@ class AdminController extends Controller
                 $tokenResult->token->expires_at
             )->toDateTimeString()
         ]);
+    }
+
+    public function getInfo(Request $request)
+    {
+        $username = $request->route('username');
+        $info = Admin::where("username", $username)->first();
+        return $info;
     }
 }
