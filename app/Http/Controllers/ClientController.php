@@ -237,15 +237,14 @@ class ClientController extends Controller
             $list->name = $pro->name;
             $list->referral = $pro->referral;
             $list->verify = $pro->verify;
-            $list->ip = $pro->ip;
-            $list->front_photo = $pro->front_photo;
-            $list->back_photo = $pro->back_photo;
-            $list->portrait_video = $pro->portrait_video;
+            $list->ip = $info->ip;
+            $list->front_photo = $info->front_photo;
+            $list->back_photo = $info->back_photo;
+            $list->portrait_video = $info->portrait_video;
             array_push($data, $list);
         }
-        return response()->json(["status" => true, "data" => $data, "total" => Client::count()]);
 
-        return $info;
+        return response()->json(["status" => true, "data" => $data, "total" => Client::count()]);
     }
 
     public function search(Request $request)
