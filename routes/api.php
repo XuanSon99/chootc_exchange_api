@@ -61,6 +61,7 @@ Route::group([
     'middleware' => 'auth:admin'
 ], function () {
 
+    Route::get('user-info/{phone}', 'App\Http\Controllers\ClientController@getUserInfo');
     Route::get('info/{username}', 'App\Http\Controllers\AdminController@getInfo');
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::resource('verify', 'App\Http\Controllers\VerifyController');

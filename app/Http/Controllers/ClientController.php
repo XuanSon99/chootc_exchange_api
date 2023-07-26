@@ -220,6 +220,34 @@ class ClientController extends Controller
         return $list;
     }
 
+    public function getUserInfo(Request $request)
+    {
+        $phone = $request->route('phone');
+        $clients = Client::where("phone", $phone)->first();
+
+        $data = [];
+        foreach ($clients as $pro) {
+            $info = Verify::where("phone", $pro->phone)->first();
+            $list = new \stdClass();
+            $list->id = $pro->id;
+            $list->phone = $pro->phone;
+            $list->address = $pro->address;
+            $list->birthday = $pro->birthday;
+            $list->gender = $pro->gender;
+            $list->name = $pro->name;
+            $list->referral = $pro->referral;
+            $list->verify = $pro->verify;
+            $list->ip = $pro->ip;
+            $list->front_photo = $pro->front_photo;
+            $list->back_photo = $pro->back_photo;
+            $list->portrait_video = $pro->portrait_video;
+            array_push($data, $list);
+        }
+        return response()->json(["status" => true, "data" => $data, "total" => Client::count()]);
+
+        return $info;
+    }
+
     public function search(Request $request)
     {
         $query = $request->get('query');
