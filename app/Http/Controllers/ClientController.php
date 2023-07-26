@@ -223,28 +223,24 @@ class ClientController extends Controller
     public function getUserInfo(Request $request)
     {
         $phone = $request->route('phone');
-        $clients = Client::where("phone", $phone)->first();
+        $pro = Client::where("phone", $phone)->first();
 
-        $data = [];
-        foreach ($clients as $pro) {
-            $info = Verify::where("phone", $pro->phone)->first();
-            $list = new \stdClass();
-            $list->id = $pro->id;
-            $list->phone = $pro->phone;
-            $list->address = $pro->address;
-            $list->birthday = $pro->birthday;
-            $list->gender = $pro->gender;
-            $list->name = $pro->name;
-            $list->referral = $pro->referral;
-            $list->verify = $pro->verify;
-            $list->ip = $info->ip;
-            $list->front_photo = $info->front_photo;
-            $list->back_photo = $info->back_photo;
-            $list->portrait_video = $info->portrait_video;
-            array_push($data, $list);
-        }
+        $info = Verify::where("phone", $pro->phone)->first();
+        $list = new \stdClass();
+        $list->id = $pro->id;
+        $list->phone = $pro->phone;
+        $list->address = $pro->address;
+        $list->birthday = $pro->birthday;
+        $list->gender = $pro->gender;
+        $list->name = $pro->name;
+        $list->referral = $pro->referral;
+        $list->verify = $pro->verify;
+        $list->ip = $info->ip;
+        $list->front_photo = $info->front_photo;
+        $list->back_photo = $info->back_photo;
+        $list->portrait_video = $info->portrait_video;
 
-        return $data;
+        return $list;
     }
 
     public function search(Request $request)
