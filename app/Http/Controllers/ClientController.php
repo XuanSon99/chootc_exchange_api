@@ -225,8 +225,6 @@ class ClientController extends Controller
         $phone = $request->route('phone');
         $clients = Client::where("phone", $phone)->first();
 
-        return $clients;
-
         $data = [];
         foreach ($clients as $pro) {
             $info = Verify::where("phone", $pro->phone)->first();
@@ -246,7 +244,7 @@ class ClientController extends Controller
             array_push($data, $list);
         }
 
-        return response()->json(["status" => true, "data" => $data, "total" => Client::count()]);
+        return $data;
     }
 
     public function search(Request $request)
