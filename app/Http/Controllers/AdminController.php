@@ -76,6 +76,7 @@ class AdminController extends Controller
 
         return response()->json([
             'access_token' => $tokenResult->accessToken,
+            'username' => $request->username,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
