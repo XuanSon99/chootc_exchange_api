@@ -180,6 +180,9 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::orderBy('created_at', 'DESC')->paginate(10);
+
+        return $clients;
+
         $data = [];
         foreach ($clients as $pro) {
             $info = Verify::where("phone", $pro->phone)->first();
