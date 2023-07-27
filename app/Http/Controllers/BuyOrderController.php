@@ -65,9 +65,9 @@ class BuyOrderController extends Controller
         return BuyOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function show(BuyOrder $BuyOrder)
+    public function show(BuyOrder $order)
     {
-        return response()->json($BuyOrder);
+        return $order;
     }
 
     public function update(Request $request, BuyOrder $BuyOrder)
