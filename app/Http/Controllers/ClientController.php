@@ -206,6 +206,15 @@ class ClientController extends Controller
         return response()->json(["status" => true], 200);
     }
 
+    public function update(Request $request, Client $Client)
+    {
+        $Client->update([
+            'verify' => $request->success
+        ]);
+
+        return response()->json(["status" => true], 200);
+    }
+
     public function destroy(Client $Client)
     {
         $Client->delete();
