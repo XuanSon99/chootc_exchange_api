@@ -68,15 +68,14 @@ class SellOrderController extends Controller
         return SellOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
     }
 
+    public function show(SellOrder $SellOrder)
+    {
+        return $SellOrder;
+    }
+
     public function update(Request $request, SellOrder $SellOrder)
     {
         $SellOrder->update($request->all());
-        return response()->json(["status" => true], 200);
-    }
-
-    public function destroy(SellOrder $SellOrder)
-    {
-        $SellOrder->delete();
         return response()->json(["status" => true], 200);
     }
 
@@ -100,5 +99,11 @@ class SellOrderController extends Controller
         ])->post($param, $data);
 
         return $response['data'][4]['adv']['price'];
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        return SellOrder::where('code', 'like', "%{$query}%")->get();
     }
 }

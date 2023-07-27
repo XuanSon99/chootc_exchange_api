@@ -75,6 +75,8 @@ Route::group([
         'prefix' => 'search'
     ], function () {
         Route::get('client', 'App\Http\Controllers\ClientController@search');
+        Route::get('buy-order', 'App\Http\Controllers\BuyOrderController@search');
+        Route::get('sell-order', 'App\Http\Controllers\SellOrderController@search');
     });
 });
 

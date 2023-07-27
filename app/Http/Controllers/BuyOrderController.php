@@ -65,15 +65,14 @@ class BuyOrderController extends Controller
         return BuyOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
     }
 
+    public function show(BuyOrder $BuyOrder)
+    {
+        return $BuyOrder;
+    }
+
     public function update(Request $request, BuyOrder $BuyOrder)
     {
         $BuyOrder->update($request->all());
-        return response()->json(["status" => true], 200);
-    }
-
-    public function destroy(BuyOrder $BuyOrder)
-    {
-        $BuyOrder->delete();
         return response()->json(["status" => true], 200);
     }
 
@@ -97,5 +96,11 @@ class BuyOrderController extends Controller
         ])->post($param, $data);
 
         return $response['data'][4]['adv']['price'];
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        return BuyOrder::where('code', 'like', "%{$query}%")->get();
     }
 }
