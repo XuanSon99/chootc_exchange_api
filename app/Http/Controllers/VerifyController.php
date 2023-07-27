@@ -80,6 +80,11 @@ class VerifyController extends Controller
     public function destroy(Verify $Verify)
     {
         $Verify->delete();
+
+        Client::where("phone", $Verify->phone)->update([
+            'verify' => ''
+        ]);
+
         return response()->json(["status" => true], 200);
     }
 
