@@ -67,7 +67,7 @@ class BuyOrderController extends Controller
 
     public function show(BuyOrder $BuyOrder)
     {
-        return "đmm";
+        return $BuyOrder;
     }
 
     public function update(Request $request, BuyOrder $BuyOrder)
