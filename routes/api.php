@@ -59,7 +59,7 @@ Route::resource('admin', 'App\Http\Controllers\AdminController');
 
 Route::group([
     'middleware' => 'auth:admin',
-    'prefix' => 'admin'
+    'prefix' => 'manage'
 ], function () {
 
     Route::get('user-info/{phone}', 'App\Http\Controllers\ClientController@getUserInfo');
