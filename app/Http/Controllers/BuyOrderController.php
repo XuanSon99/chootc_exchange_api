@@ -65,11 +65,6 @@ class BuyOrderController extends Controller
         return BuyOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function show(Request $request)
-    {
-        return BuyOrder::where("code", $request->phone)->get();
-    }
-
     public function update(Request $request, BuyOrder $BuyOrder)
     {
         $BuyOrder->update($request->all());
@@ -102,5 +97,11 @@ class BuyOrderController extends Controller
     {
         $query = $request->get('query');
         return BuyOrder::where('code', 'like', "%{$query}%")->get();
+    }
+
+    public function show(Request $request)
+    {
+        $code = $request->route('code');
+        return BuyOrder::where("code", $code)->first();
     }
 }
