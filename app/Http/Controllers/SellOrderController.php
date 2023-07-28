@@ -68,11 +68,6 @@ class SellOrderController extends Controller
         return SellOrder::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function show(SellOrder $SellOrder)
-    {
-        return $SellOrder;
-    }
-
     public function update(Request $request, SellOrder $SellOrder)
     {
         $SellOrder->update($request->all());
