@@ -58,7 +58,8 @@ Route::group([
 Route::resource('admin', 'App\Http\Controllers\AdminController');
 
 Route::group([
-    'middleware' => 'auth:admin'
+    'middleware' => 'auth:admin',
+    'prefix' => 'admin'
 ], function () {
 
     Route::get('user-info/{phone}', 'App\Http\Controllers\ClientController@getUserInfo');
@@ -66,9 +67,7 @@ Route::group([
     Route::resource('client', 'App\Http\Controllers\ClientController');
     Route::resource('verify', 'App\Http\Controllers\VerifyController');
     Route::resource('buy-order', 'App\Http\Controllers\BuyOrderController');
-    Route::get('buy-order-info/{code}', 'App\Http\Controllers\BuyOrderController@getOrderInfo');
-    Route::resource('sellOrder', 'App\Http\Controllers\SellOrderController');
-    Route::get('sell-order-info/{code}', 'App\Http\Controllers\SellOrderController@getOrderInfo');
+    Route::resource('sell-order', 'App\Http\Controllers\SellOrderController');
     Route::resource('state', 'App\Http\Controllers\StateController');
 
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
@@ -81,4 +80,3 @@ Route::group([
         Route::get('sell-order', 'App\Http\Controllers\SellOrderController@search');
     });
 });
-
