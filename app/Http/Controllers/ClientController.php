@@ -207,6 +207,7 @@ class ClientController extends Controller
 
     public function destroy(Client $Client)
     {
+        Verify::where("phone", $Client->phone)->delete();
         $Client->delete();
         return response()->json(["status" => true], 200);
     }
