@@ -106,4 +106,10 @@ class SellOrderController extends Controller
         $query = $request->get('query');
         return SellOrder::where('code', 'like', "%{$query}%")->get();
     }
+
+    public function getOrderInfo(Request $request)
+    {
+        $code = $request->route('code');
+        return BuyOrder::where("code", $code)->first();
+    }
 }

@@ -182,16 +182,6 @@ class ClientController extends Controller
         $clients = Client::orderBy('created_at', 'DESC')->paginate(10);
 
         return $clients;
-
-        $data = [];
-        foreach ($clients as $pro) {
-            $info = Verify::where("phone", $pro->phone)->first();
-            $list = new \stdClass();
-            $list->id = $pro->id;
-            $list->phone = $pro->phone;
-            array_push($data, $list);
-        }
-        return response()->json(["status" => true, "data" => $data, "total" => Client::count()]);
     }
 
     public function updateProfile(Request $request)
@@ -255,17 +245,6 @@ class ClientController extends Controller
     public function search(Request $request)
     {
         $query = $request->get('query');
-        $clients = Client::where('phone', 'like', "%{$query}%")->paginate(10);
-
-        $data = [];
-        foreach ($clients as $pro) {
-            $info = Verify::where("phone", $pro->phone)->first();
-            $list = new \stdClass();
-            $list->id = $pro->id;
-            $list->phone = $pro->phone;
-            array_push($data, $list);
-        }
-
-        return response()->json(["status" => true, "data" => $data]);
+        return Client::where('phone', 'like', "%{$query}%")->get();
     }
 }

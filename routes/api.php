@@ -68,6 +68,7 @@ Route::group([
     Route::resource('buyOrder', 'App\Http\Controllers\BuyOrderController');
     Route::get('buy-order-info/{code}', 'App\Http\Controllers\BuyOrderController@getOrderInfo');
     Route::resource('sellOrder', 'App\Http\Controllers\SellOrderController');
+    Route::get('sell-order-info/{code}', 'App\Http\Controllers\SellOrderController@getOrderInfo');
     Route::resource('state', 'App\Http\Controllers\StateController');
 
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
