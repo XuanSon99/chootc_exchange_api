@@ -47,6 +47,9 @@ Route::group([
     Route::get('buy-order', 'App\Http\Controllers\BuyOrderController@getOrder');
     Route::get('sell-order', 'App\Http\Controllers\SellOrderController@getOrder');
     Route::get('states', 'App\Http\Controllers\StateController@index');
+    Route::get('notifications', 'App\Http\Controllers\NotificationController@getNotification');
+    Route::get('read-noti', 'App\Http\Controllers\NotificationController@readNotification');
+    Route::get('count-noti', 'App\Http\Controllers\NotificationController@CountNotification');
 });
 
 Route::group([
@@ -69,6 +72,7 @@ Route::group([
     Route::resource('buy-order', 'App\Http\Controllers\BuyOrderController');
     Route::resource('sell-order', 'App\Http\Controllers\SellOrderController');
     Route::resource('state', 'App\Http\Controllers\StateController');
+    Route::resource('notification', 'App\Http\Controllers\NotificationController');
 
     Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
 
