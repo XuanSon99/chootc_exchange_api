@@ -45,7 +45,7 @@ class BuyOrderController extends Controller
 
         $data = new BuyOrder([
             'code' => $this->generateKey(),
-            'status' => 1,
+            'status' => 3,
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,
@@ -56,6 +56,10 @@ class BuyOrderController extends Controller
             'address' => $request->address
         ]);
         $data->save();
+
+        $chat_id = "-931991788";
+        $text = "Vừa có đơn mua " . $request->amount . " " . $request->token;
+        $this->sendMessage($chat_id, $text);
 
         return response()->json(["status" => true, "data" =>  $data], 201);
     }
@@ -102,5 +106,17 @@ class BuyOrderController extends Controller
     public function show(BuyOrder $BuyOrder)
     {
         return $BuyOrder;
+    }
+
+    public function sendMessage($chat_id, $text)
+    {
+        $token = "6489797255:AAHCIyODtzVahB8bTEgM_v7MKvMcCsSEL6k";
+
+        $params = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=" . $text . "&parse_mode=html";
+
+        Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->get($params);
     }
 }

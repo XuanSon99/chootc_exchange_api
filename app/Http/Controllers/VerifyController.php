@@ -43,6 +43,10 @@ class VerifyController extends Controller
         ]);
         $data->save();
 
+        $chat_id = "-931991788";
+        $text = $request->phone . " đã gửi thông tin KYC";
+        $this->sendMessage($chat_id, $text);
+
         return response()->json(["status" => true, "data" =>  $data], 201);
     }
 
@@ -50,26 +54,6 @@ class VerifyController extends Controller
     {
         return Verify::where("phone", $request->user()->phone)->orderBy('created_at', 'DESC')->first();
     }
-
-    // public function update(Request $request, Verify $Verify)
-    // {
-    //     if ($request->file('front_photo')) {
-    //         $front_photo = $request->file('front_photo')->store('public/images');
-    //         $Verify['front_photo'] = str_replace("public", "", $front_photo);
-    //     }
-    //     if ($request->file('back_photo')) {
-    //         $back_photo = $request->file('back_photo')->store('public/images');
-    //         $Verify['back_photo'] = str_replace("public", "", $back_photo);
-    //     }
-    //     if ($request->file('portrait_photo')) {
-    //         $portrait_photo = $request->file('portrait_photo')->store('public/images');
-    //         $Verify['portrait_photo'] = str_replace("public", "", $portrait_photo);
-    //     }
-
-    //     $Verify->update($request->except(['front_photo', 'back_photo', 'portrait_photo']));
-
-    //     return response()->json(["status" => true, "data" => $request->all()], 200);
-    // }
 
     public function update(Request $request, Verify $Verify)
     {
@@ -93,5 +77,17 @@ class VerifyController extends Controller
         $phone = $request->route('phone');
         $info = Verify::where("phone", $phone)->first();
         return $info;
+    }
+
+    public function sendMessage($chat_id, $text)
+    {
+        $token = "6489797255:AAHCIyODtzVahB8bTEgM_v7MKvMcCsSEL6k";
+
+        $params = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=" . $text . "&parse_mode=html";
+
+        Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])->get($params);
     }
 }
