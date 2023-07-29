@@ -29,6 +29,13 @@ class NotificationController extends Controller
 
     public function readNotification(Request $request)
     {
+        Notification::where('id', $request->id)->update(['is_readed' => 1]);
+        
+        return response()->json(["status" => true], 200);
+    }
+
+    public function readAll(Request $request)
+    {
         $list = Notification::where(["phone" => $request->user()->phone, "is_readed" => 0])->get();
 
         $ids = [];
