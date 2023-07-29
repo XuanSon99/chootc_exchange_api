@@ -58,13 +58,11 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
-Route::resource('admin', 'App\Http\Controllers\AdminController');
-
 Route::group([
     'middleware' => 'auth:admin',
     'prefix' => 'manage'
 ], function () {
-
+    Route::resource('admin', 'App\Http\Controllers\AdminController');
     Route::get('user-info/{phone}', 'App\Http\Controllers\ClientController@getUserInfo');
     Route::get('info/{username}', 'App\Http\Controllers\AdminController@getInfo');
     Route::resource('client', 'App\Http\Controllers\ClientController');
@@ -74,7 +72,7 @@ Route::group([
     Route::resource('state', 'App\Http\Controllers\StateController');
     Route::resource('notification', 'App\Http\Controllers\NotificationController');
 
-    Route::get('overview', 'App\Http\Controllers\ClientController@getOverview');
+    Route::get('overview', 'App\Http\Controllers\AdminController@getOverview');
 
     Route::group([
         'prefix' => 'search'

@@ -212,14 +212,6 @@ class ClientController extends Controller
         return response()->json(["status" => true], 200);
     }
 
-    public function getOverview()
-    {
-        $list = new \stdClass();
-        $list->new_user = Client::whereDate('created_at', Carbon::today())->count();
-        $list->total_user = Client::All()->count();
-        return $list;
-    }
-
     public function getUserInfo(Request $request)
     {
         $phone = $request->route('phone');

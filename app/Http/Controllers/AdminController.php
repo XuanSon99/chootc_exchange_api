@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Client;
+use App\Models\BuyOrder;
+use App\Models\SellOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -90,5 +93,19 @@ class AdminController extends Controller
         $username = $request->route('username');
         $info = Admin::where("username", $username)->first();
         return $info;
+    }
+
+    public function getOverview()
+    {
+        $list = new \stdClass();
+        $list->new_user = Client::whereDate('created_at', Carbon::today())->count();
+        $list->total_user = Client::All()->count();
+
+        $list->new_buy_order = BuyOrder::whereDate('created_at', Carbon::today())->where('status', 1)->count();
+        $list->total_buy_order = BuyOrder::where('status', 1)->count();
+
+        $list->new_sell_order = SellOrder::whereDate('created_at', Carbon::today())->where('status', 1)->count();
+        $list->total_sell_order = SellOrder::where('status', 1)->count();
+        return $list;
     }
 }
