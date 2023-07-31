@@ -20,6 +20,7 @@ class NotificationController extends Controller
             'phone' => $request->phone,
             'content' => $request->content,
             'color' => $request->color,
+            'url' => $request->url,
             'is_readed' => 0
         ]);
         $data->save();
