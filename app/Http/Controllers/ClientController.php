@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Client;
 use App\Models\Verify;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 
@@ -45,6 +46,14 @@ class ClientController extends Controller
             'referral' => $request->referral
         ]);
         $data->save();
+
+        $noti = new Notification([
+            'phone' => $request->phone,
+            'color' => '#3ED050',
+            'content' => 'Chúc mừng bạn đã tạo tài khoản thành công. Hãy KYC ngay để tăng hạn mức giao dịch.',
+            'url' => '/kyc/' . $request->phone
+        ]);
+        $noti->save();
 
         // try {
         //     MailController::VERIFY($user_id);
