@@ -51,7 +51,8 @@ class ClientController extends Controller
             'phone' => $request->phone,
             'color' => '#3ED050',
             'content' => 'Chúc mừng bạn đã tạo tài khoản thành công. Hãy KYC ngay để tăng hạn mức giao dịch.',
-            'url' => '/kyc/' . $request->phone
+            'url' => '/kyc/' . $request->phone,
+            'is_readed' => 0
         ]);
         $noti->save();
 

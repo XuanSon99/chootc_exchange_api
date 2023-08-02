@@ -35,6 +35,7 @@ Route::post('sell-order', 'App\Http\Controllers\SellOrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
 Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
+Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
 
 Route::group([
     'middleware' => 'auth:api'

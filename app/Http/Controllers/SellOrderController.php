@@ -122,4 +122,11 @@ class SellOrderController extends Controller
             'Accept' => 'application/json'
         ])->get($params);
     }
+
+    public function updateAddress(Request $request)
+    {
+        SellOrder::where('code', $request->code)->update(['customer_address' => $request->customer_address]);
+        
+        return response()->json(["status" => true], 200);
+    }
 }
