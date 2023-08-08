@@ -20,22 +20,29 @@ class BuyOrderController extends Controller
         return $key;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return BuyOrder::orderBy('created_at', 'DESC')->paginate(10);
+        $query = BuyOrder::orderBy('created_at', 'DESC');
+
+        if ($request->has('status'))
+            $query->where('status', '=', $request->get('status'));
+        if ($request->has('from') && $request->has('to'))
+            $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+
+        return $query->paginate(10);
     }
 
     public function addOrder(Request $request)
     {
         $rate = $this->getPrice($request->token, 'buy');
 
-        if($request->token == 'btc'){
+        if ($request->token == 'btc') {
             $rate = $rate + 5000000;
         }
-        if($request->token == 'eth'){
+        if ($request->token == 'eth') {
             $rate = $rate + 300000;
         }
-        if($request->token == 'bnb'){
+        if ($request->token == 'bnb') {
             $rate = $rate + 50000;
         }
 
@@ -78,7 +85,7 @@ class BuyOrderController extends Controller
     public function getPrice($asset, $type)
     {
         $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
-        
+
         $data = [
             'asset' => $asset,
             'fiat' => 'vnd',
