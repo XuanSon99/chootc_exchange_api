@@ -28,8 +28,12 @@ class BuyOrderController extends Controller
             $query->where('status', '=', $request->get('status'));
         if ($request->has('from') && $request->has('to'))
             $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+        
+        $perPage = 10;
+        if ($request->has('perPage'))
+            $perPage = $request->get('perPage');
 
-        return $query->paginate(10);
+        return $query->paginate($perPage);
     }
 
     public function addOrder(Request $request)
