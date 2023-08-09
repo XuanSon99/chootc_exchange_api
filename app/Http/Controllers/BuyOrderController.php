@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class BuyOrderController extends Controller
 {
@@ -26,8 +27,12 @@ class BuyOrderController extends Controller
 
         if ($request->has('status'))
             $query->where('status', '=', $request->get('status'));
+
         if ($request->has('from') && $request->has('to'))
-            $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+            if($request->get('from') == $request->get('to'))
+                $query->whereDate('created_at', Carbon::today());
+            else
+                $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
         
         $perPage = 10;
         if ($request->has('perPage'))
