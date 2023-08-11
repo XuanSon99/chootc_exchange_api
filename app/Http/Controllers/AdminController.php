@@ -120,7 +120,7 @@ class AdminController extends Controller
 
         foreach ($members as $mem) {
             $buy_list = BuyOrder::where('phone', $mem->phone);
-            $sell_list = BuyOrder::where('phone', $mem->phone);
+            $sell_list = SellOrder::where('phone', $mem->phone);
 
             if ($request->has('from') && $request->has('to'))
                 if ($request->get('from') == $request->get('to')) {
