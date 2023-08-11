@@ -60,6 +60,8 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
+Route::get('order-of-member', 'App\Http\Controllers\AdminController@getOrderOfMember');
+
 Route::group([
     'middleware' => 'auth:admin',
     'prefix' => 'manage'

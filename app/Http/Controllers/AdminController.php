@@ -108,4 +108,29 @@ class AdminController extends Controller
         $list->total_sell_order = SellOrder::where('status', 1)->count();
         return $list;
     }
+
+    public function getOrderOfMember(Request $request)
+    {
+        $members = Client::where('referral', $request->get('referral'))->get();
+
+        $data = array();
+
+        foreach ($members as $mem) {
+            $buy_list = BuyOrder::where('phone', $mem->phone);
+
+            if ($request->has('from') && $request->has('to'))
+                if ($request->get('from') == $request->get('to'))
+                    $buy_list->whereDate('created_at', Carbon::today());
+                else
+                    $buy_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+
+            $perPage = 10;
+            if ($request->has('perPage'))
+                $perPage = $request->get('perPage');
+
+            array_push($data, $buy_list->paginate($perPage));
+        }
+
+        return $data;
+    }
 }
