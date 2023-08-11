@@ -113,7 +113,7 @@ class AdminController extends Controller
     {
         $members = Client::where('referral', $request->get('phone'))->get();
 
-        $data = array();
+        $data = [];
 
         foreach ($members as $mem) {
             $buy_list = BuyOrder::where('phone', $mem->phone);
@@ -128,7 +128,7 @@ class AdminController extends Controller
             if ($request->has('perPage'))
                 $perPage = $request->get('perPage');
 
-            array_merge($data, $buy_list->get());
+            $data = array_merge($data, $buy_list->get());
         }
 
         return $data;
