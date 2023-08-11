@@ -128,7 +128,7 @@ class AdminController extends Controller
             if ($request->has('perPage'))
                 $perPage = $request->get('perPage');
 
-            $data = array_merge($data, $buy_list->get());
+            $data = array_merge($data, $buy_list->get()->toArray());
         }
 
         return $data;
