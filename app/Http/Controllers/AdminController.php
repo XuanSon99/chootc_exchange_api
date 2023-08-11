@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminController extends Controller
 {
@@ -132,6 +134,13 @@ class AdminController extends Controller
             $data = array_merge($data, $buy_list->get()->toArray());
         }
 
-        return Paginator::make($data, count($data), 10);
+        return  $this->paginate($data);
+    }
+
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }
