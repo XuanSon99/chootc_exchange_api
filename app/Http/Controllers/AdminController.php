@@ -120,24 +120,29 @@ class AdminController extends Controller
 
         foreach ($members as $mem) {
             $buy_list = BuyOrder::where('phone', $mem->phone);
+            $sell_list = BuyOrder::where('phone', $mem->phone);
 
             if ($request->has('from') && $request->has('to'))
                 if ($request->get('from') == $request->get('to'))
                     $buy_list->whereDate('created_at', Carbon::today());
+                    $sell_list->whereDate('created_at', Carbon::today());
                 else
                     $buy_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
-
-            $perPage = 10;
-            if ($request->has('perPage'))
-                $perPage = $request->get('perPage');
+                    $sell_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
 
             $data = array_merge($data, $buy_list->get()->toArray());
+            $data = array_merge($data, $sell_list->get()->toArray());
         }
 
-        return  $this->paginate($data);
+
+        $perPage = 10;
+        if ($request->has('perPage'))
+            $perPage = $request->get('perPage');
+
+        return  $this->paginate($data, $perPage);
     }
 
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    public function paginate($items, $perPage, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
