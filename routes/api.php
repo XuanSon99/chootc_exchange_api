@@ -60,7 +60,7 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
-Route::get('order-of-member', 'App\Http\Controllers\AdminController@getOrderOfMember');
+
 
 Route::group([
     'middleware' => 'auth:admin',
@@ -77,6 +77,7 @@ Route::group([
     Route::resource('notification', 'App\Http\Controllers\NotificationController');
 
     Route::get('overview', 'App\Http\Controllers\AdminController@getOverview');
+    Route::get('ref-order', 'App\Http\Controllers\AdminController@getOrderOfMember');
 
     Route::group([
         'prefix' => 'search'

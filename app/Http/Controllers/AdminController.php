@@ -119,8 +119,8 @@ class AdminController extends Controller
         $data = [];
 
         foreach ($members as $mem) {
-            $buy_list = BuyOrder::where('phone', $mem->phone);
-            $sell_list = SellOrder::where('phone', $mem->phone);
+            $buy_list = BuyOrder::where('phone', $mem->phone)->where('status', 1);
+            $sell_list = SellOrder::where('phone', $mem->phone)->where('status', 1);
 
             if ($request->has('from') && $request->has('to'))
                 if ($request->get('from') == $request->get('to')) {
