@@ -111,7 +111,7 @@ class AdminController extends Controller
 
     public function getOrderOfMember(Request $request)
     {
-        $members = Client::where('referral', $request->get('referral'))->get();
+        $members = Client::where('referral', $request->get('phone'))->get();
 
         $data = array();
 
@@ -128,7 +128,7 @@ class AdminController extends Controller
             if ($request->has('perPage'))
                 $perPage = $request->get('perPage');
 
-            array_push($data, $buy_list->paginate($perPage));
+            array_push($data, $buy_list);
         }
 
         return $data;
