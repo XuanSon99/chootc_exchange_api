@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 class AdminController extends Controller
 {
@@ -131,6 +132,6 @@ class AdminController extends Controller
             $data = array_merge($data, $buy_list->get()->toArray());
         }
 
-        return $data;
+        return Paginator::make($data, count($data), 10);
     }
 }
