@@ -123,12 +123,13 @@ class AdminController extends Controller
             $sell_list = BuyOrder::where('phone', $mem->phone);
 
             if ($request->has('from') && $request->has('to'))
-                if ($request->get('from') == $request->get('to'))
+                if ($request->get('from') == $request->get('to')) {
                     $buy_list->whereDate('created_at', Carbon::today());
                     $sell_list->whereDate('created_at', Carbon::today());
-                else
+                } else {
                     $buy_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
                     $sell_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+                }
 
             $data = array_merge($data, $buy_list->get()->toArray());
             $data = array_merge($data, $sell_list->get()->toArray());
