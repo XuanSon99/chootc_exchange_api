@@ -141,6 +141,8 @@ class AdminController extends Controller
 
         $data = collect($data)->sortBy('created_at')->reverse()->toArray();
 
+        $data = (array) $data;
+
         return  $this->paginate($data, $perPage);
     }
 
