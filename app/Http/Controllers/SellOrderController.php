@@ -46,16 +46,6 @@ class SellOrderController extends Controller
 
         $rate = $this->getPrice($request->token, 'sell');
 
-        if($request->token == 'btc'){
-            $rate = $rate - 5000000;
-        }
-        if($request->token == 'eth'){
-            $rate = $rate - 300000;
-        }
-        if($request->token == 'bnb'){
-            $rate = $rate - 50000;
-        }
-
         if (is_null($rate)) {
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
         }

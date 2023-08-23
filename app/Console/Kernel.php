@@ -28,13 +28,13 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             DB::table('assets')->where('symbol','=','eth')->update([
-                'buy_rate' => $this->getPrice('eth','buy') + 300000,
-                'sell_rate' => $this->getPrice('eth','sell') - 300000,
+                'buy_rate' => $this->getPrice('eth','buy'),
+                'sell_rate' => $this->getPrice('eth','sell'),
                 "updated_at" => now(),
             ]);
             DB::table('assets')->where('symbol','=','btc')->update([
-                'buy_rate' => $this->getPrice('btc','buy') + 5000000,
-                'sell_rate' => $this->getPrice('btc','sell') - 5000000,
+                'buy_rate' => $this->getPrice('btc','buy'),
+                'sell_rate' => $this->getPrice('btc','sell'),
                 "updated_at" => now()
             ]);
         })->cron('*/10 * * * *');
@@ -46,8 +46,8 @@ class Kernel extends ConsoleKernel
                 "updated_at" => now()
             ]);
             DB::table('assets')->where('symbol','=','bnb')->update([
-                'buy_rate' => $this->getPrice('bnb','buy') + 50000,
-                'sell_rate' => $this->getPrice('bnb','sell') - 50000,
+                'buy_rate' => $this->getPrice('bnb','buy'),
+                'sell_rate' => $this->getPrice('bnb','sell'),
                 "updated_at" => now()
             ]);
         })->cron('30 * * * *');
