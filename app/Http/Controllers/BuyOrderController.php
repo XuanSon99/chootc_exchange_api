@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Models\Client;
 
 class BuyOrderController extends Controller
 {
@@ -44,9 +45,9 @@ class BuyOrderController extends Controller
     public function addOrder(Request $request)
     {
 
-        $user = Verify::where("phone", $request->phone)->first();
+        $user = Client::where("phone", $request->phone)->first();
 
-        if($user['verify'] != 'success'){
+        if($user->verify != 'success'){
             return;
         }
 
