@@ -32,7 +32,7 @@ Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
 Route::get('bank', 'App\Http\Controllers\RateController@getBankInfo');
 Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
 Route::post('sell-order', 'App\Http\Controllers\SellOrderController@addOrder');
-Route::resource('setup', 'App\Http\Controllers\SetupController');
+Route::get('setup', 'App\Http\Controllers\SetupController@index');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
 Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
 Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
@@ -60,8 +60,6 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
-
-
 Route::group([
     'middleware' => 'auth:admin',
     'prefix' => 'manage'
@@ -75,6 +73,7 @@ Route::group([
     Route::resource('sell-order', 'App\Http\Controllers\SellOrderController');
     Route::resource('state', 'App\Http\Controllers\StateController');
     Route::resource('notification', 'App\Http\Controllers\NotificationController');
+    Route::resource('setups', 'App\Http\Controllers\SetupController');
 
     Route::get('overview', 'App\Http\Controllers\AdminController@getOverview');
     Route::get('ref-order', 'App\Http\Controllers\AdminController@getOrderOfMember');
