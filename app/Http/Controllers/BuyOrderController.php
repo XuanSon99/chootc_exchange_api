@@ -46,7 +46,7 @@ class BuyOrderController extends Controller
 
         $user = Verify::where("phone", $request->phone)->first();
 
-        if($user->verify != 'success'){
+        if($user['verify'] != 'success'){
             return;
         }
 
