@@ -28,9 +28,9 @@ class SetupController extends Controller
         return $Setup;
     }
 
-    public function updateSetup(Request $request, Setup $Setup)
+    public function updateSetup(Request $request)
     {
-        $Setup->update($request->all());
+        Setup::where('name', $request->name)->update(['value' => $request->value]);
         return response()->json(["status" => true], 200);
     }
 
