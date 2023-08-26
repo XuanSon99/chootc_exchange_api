@@ -43,6 +43,13 @@ class BuyOrderController extends Controller
 
     public function addOrder(Request $request)
     {
+
+        $user = Verify::where("phone", $request->phone)->first();
+
+        if($user->verify != 'success'){
+            return;
+        }
+
         $rate = $this->getPrice($request->token, 'buy');
 
         if (is_null($rate)) {
