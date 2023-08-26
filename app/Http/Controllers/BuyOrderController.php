@@ -48,7 +48,7 @@ class BuyOrderController extends Controller
         $user = Client::where("phone", $request->phone)->first();
 
         if($user->verify != 'success'){
-            return;
+            return response()->json(["status" => false, "message" => ["Vui lòng KYC để thực hiện giao dịch mua"]], 400);
         }
 
         $rate = $this->getPrice($request->token, 'buy');
