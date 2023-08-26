@@ -28,16 +28,16 @@ class SetupController extends Controller
         return $Setup;
     }
 
-    public function update(Request $request, Setup $Setup)
+    public function updateSetup(Request $request, Setup $Setup)
     {
         $Setup->update($request->all());
         return response()->json(["status" => true], 200);
     }
 
-    public function destroy(Setup $Setup)
-    {
-        $Setup->delete();
-        return response()->json(["status" => true], 200);
-    }
+    // public function destroy(Setup $Setup)
+    // {
+    //     $Setup->delete();
+    //     return response()->json(["status" => true], 200);
+    // }
 
 }
