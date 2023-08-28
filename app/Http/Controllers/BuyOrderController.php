@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyOrder;
+use App\Models\SellOrder;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
