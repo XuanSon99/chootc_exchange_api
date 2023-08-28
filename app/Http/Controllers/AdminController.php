@@ -139,7 +139,7 @@ class AdminController extends Controller
         if ($request->has('perPage'))
             $perPage = $request->get('perPage');
 
-        $data = collect($data)->sortBy('created_at')->reverse()->toArray();
+        $data = collect($data)->sortBy('id')->all();
 
         return  $this->paginate($data, $perPage);
     }
