@@ -49,9 +49,9 @@ class ClientController extends Controller
 
         $noti = new Notification([
             'phone' => $request->phone,
-            'color' => '#3ED050',
+            'color' => '#01c77d',
             'content' => 'Chúc mừng bạn đã tạo tài khoản thành công. Hãy KYC ngay để tăng hạn mức giao dịch.',
-            'url' => '/kyc/' . $request->phone,
+            'url' => '/profile',
             'is_readed' => 0
         ]);
         $noti->save();
