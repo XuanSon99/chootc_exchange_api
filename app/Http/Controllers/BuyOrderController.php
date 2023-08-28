@@ -136,7 +136,7 @@ class BuyOrderController extends Controller
 
     public function getOrderOfMember(Request $request)
     {
-        $members = Client::where('referral', $request->get('phone'))->get();
+        $members = Client::where('referral', $request->user()->phone)->get();
 
         $data = [];
 

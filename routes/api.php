@@ -52,6 +52,7 @@ Route::group([
     Route::get('count-noti', 'App\Http\Controllers\NotificationController@CountNotification');
     Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
     Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
+    Route::get('ref-order', 'App\Http\Controllers\BuyOrderController@getOrderOfMember');
 });
 
 Route::group([
