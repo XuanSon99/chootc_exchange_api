@@ -133,14 +133,13 @@ class AdminController extends Controller
 
             $data = array_merge($data, $buy_list->get()->toArray());
             $data = array_merge($data, $sell_list->get()->toArray());
-            $data = collect($data)->sortByDesc('created_at')->values();
         }
 
         $perPage = 10;
         if ($request->has('perPage'))
             $perPage = $request->get('perPage');
 
-        
+        $data = collect($data)->sortByDesc('created_at')->values();
 
         return  $this->paginate($data, $perPage);
     }
