@@ -76,7 +76,7 @@ class BuyOrderController extends Controller
         $data->save();
 
         $chat_id = "-931991788";
-        $text = "🟢 Vừa có đơn mua " . $request->amount . " " . $request->token;
+        $text = "🟢 Mua " . $request->amount . " " . $request->token;
         $this->sendMessage($chat_id, $text);
 
         return response()->json(["status" => true, "data" =>  $data], 201);

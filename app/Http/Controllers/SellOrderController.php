@@ -67,7 +67,7 @@ class SellOrderController extends Controller
         $data->save();
 
         $chat_id = "-931991788";
-        $text = "🔴 Vừa có đơn bán " . $request->amount . " " . $request->token;
+        $text = "🔴 Bán " . $request->amount . " " . $request->token;
         $this->sendMessage($chat_id, $text);
 
         return response()->json(["status" => true, "data" =>  $data], 201);
