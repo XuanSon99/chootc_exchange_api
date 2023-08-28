@@ -11,6 +11,9 @@ use Validator;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\Client;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class BuyOrderController extends Controller
 {
