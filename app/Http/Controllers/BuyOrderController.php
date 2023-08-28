@@ -161,7 +161,7 @@ class BuyOrderController extends Controller
         if ($request->has('perPage'))
             $perPage = $request->get('perPage');
 
-        $data = collect($data)->sortBy('created_at')->reverse()->toArray();
+        $data = collect($data)->sortByDesc('created_at')->values();
 
         return  $this->paginate($data, $perPage);
     }
