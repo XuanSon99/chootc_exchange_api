@@ -133,4 +133,43 @@ class BuyOrderController extends Controller
             'Accept' => 'application/json'
         ])->get($params);
     }
+
+    public function getOrderOfMember(Request $request)
+    {
+        $members = Client::where('referral', $request->get('phone'))->get();
+
+        $data = [];
+
+        foreach ($members as $mem) {
+            $buy_list = BuyOrder::where('phone', $mem->phone)->where('status', 1);
+            $sell_list = SellOrder::where('phone', $mem->phone)->where('status', 1);
+
+            if ($request->has('from') && $request->has('to'))
+                if ($request->get('from') == $request->get('to')) {
+                    $buy_list->whereDate('created_at', Carbon::today());
+                    $sell_list->whereDate('created_at', Carbon::today());
+                } else {
+                    $buy_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+                    $sell_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
+                }
+
+            $data = array_merge($data, $buy_list->get()->toArray());
+            $data = array_merge($data, $sell_list->get()->toArray());
+        }
+
+        $perPage = 10;
+        if ($request->has('perPage'))
+            $perPage = $request->get('perPage');
+
+        $data = collect($data)->sortBy('created_at')->reverse()->toArray();
+
+        return  $this->paginate($data, $perPage);
+    }
+
+    public function paginate($items, $perPage, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
 }

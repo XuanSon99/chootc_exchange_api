@@ -23,19 +23,17 @@ Route::group([
 ], function () {
     Route::post('login', 'App\Http\Controllers\ClientController@login');
     Route::post('signup', 'App\Http\Controllers\ClientController@signup');
-    Route::get('verify', 'App\Http\Controllers\ClientController@verify')->name('verify');
-    Route::post('re-verify', 'App\Http\Controllers\ClientController@re_verify');
-    Route::post('forgot-password', 'App\Http\Controllers\ClientController@forgot_password');
+    // Route::get('verify', 'App\Http\Controllers\ClientController@verify')->name('verify');
+    // Route::post('re-verify', 'App\Http\Controllers\ClientController@re_verify');
+    // Route::post('forgot-password', 'App\Http\Controllers\ClientController@forgot_password');
 });
 
 Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
 Route::get('bank', 'App\Http\Controllers\RateController@getBankInfo');
-Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
 Route::post('sell-order', 'App\Http\Controllers\SellOrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
 Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
-Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
 
 Route::group([
     'middleware' => 'auth:api'
@@ -52,6 +50,8 @@ Route::group([
     Route::put('read-noti', 'App\Http\Controllers\NotificationController@readNotification');
     Route::get('read-all', 'App\Http\Controllers\NotificationController@readAll');
     Route::get('count-noti', 'App\Http\Controllers\NotificationController@CountNotification');
+    Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
+    Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
 });
 
 Route::group([
