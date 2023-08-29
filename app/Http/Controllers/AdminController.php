@@ -124,8 +124,8 @@ class AdminController extends Controller
 
             if ($request->has('from') && $request->has('to'))
                 if ($request->get('from') == $request->get('to')) {
-                    $buy_list->whereDate('created_at', Carbon::today());
-                    $sell_list->whereDate('created_at', Carbon::today());
+                    $buy_list->whereDate('created_at', $request->get('from'));
+                    $sell_list->whereDate('created_at', $request->get('from'));
                 } else {
                     $buy_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
                     $sell_list->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
