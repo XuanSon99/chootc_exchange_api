@@ -98,20 +98,6 @@ class AdminController extends Controller
         return $info;
     }
 
-    public function getOverview()
-    {
-        $list = new \stdClass();
-        $list->new_user = Client::whereDate('created_at', Carbon::today())->count();
-        $list->total_user = Client::All()->count();
-
-        $list->new_buy_order = BuyOrder::whereDate('created_at', Carbon::today())->where('status', 1)->count();
-        $list->total_buy_order = BuyOrder::where('status', 1)->count();
-
-        $list->new_sell_order = SellOrder::whereDate('created_at', Carbon::today())->where('status', 1)->count();
-        $list->total_sell_order = SellOrder::where('status', 1)->count();
-        return $list;
-    }
-
     public function getOrderOfMember(Request $request)
     {
         $members = Client::where('referral', $request->get('phone'))->get();
@@ -150,4 +136,51 @@ class AdminController extends Controller
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
+
+    public function getOverview()
+    {
+        $list = new \stdClass();
+        $list->new_user = Client::whereDate('created_at', Carbon::today())->count();
+        $list->total_user = Client::All()->count();
+
+        $list->new_buy_order = BuyOrder::whereDate('created_at', Carbon::today())->where('status', 1)->count();
+        $list->total_buy_order = BuyOrder::where('status', 1)->count();
+
+        $list->new_sell_order = SellOrder::whereDate('created_at', Carbon::today())->where('status', 1)->count();
+        $list->total_sell_order = SellOrder::where('status', 1)->count();
+        return $list;
+    }
+
+    public function adminSell(Request $request)
+    {
+        $data = new BuyOrder([
+            'code' => "00000000",
+            'status' => 1,
+            'token' => $request->token,
+            'amount' => $request->amount,
+            'money' => $request->money,
+            'fee' => $request->fee,
+            'rate' => $request->rate
+        ]);
+        $data->save();
+
+        return response()->json(["status" => true, "data" =>  $data], 201);
+    }
+
+    public function adminBuy(Request $request)
+    {
+        $data = new SellOrder([
+            'code' => "00000000",
+            'status' => 1,
+            'token' => $request->token,
+            'amount' => $request->amount,
+            'money' => $request->money,
+            'fee' => $request->fee,
+            'rate' => $request->rate
+        ]);
+        $data->save();
+
+        return response()->json(["status" => true, "data" =>  $data], 201);
+    }
+
 }

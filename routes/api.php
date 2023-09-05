@@ -78,6 +78,8 @@ Route::group([
 
     Route::get('overview', 'App\Http\Controllers\AdminController@getOverview');
     Route::get('ref-order', 'App\Http\Controllers\AdminController@getOrderOfMember');
+    Route::post('admin-sell', 'App\Http\Controllers\AdminController@adminSell');
+    Route::post('admin-buy', 'App\Http\Controllers\AdminController@adminBuy');
 
     Route::group([
         'prefix' => 'search'
