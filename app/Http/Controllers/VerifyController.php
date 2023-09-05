@@ -44,7 +44,7 @@ class VerifyController extends Controller
         ]);
         $data->save();
 
-        $chat_id = "-931991788";
+        $chat_id = "-987421757";
         $text = $request->phone . " đã gửi thông tin KYC";
         $this->sendMessage($chat_id, $text);
 
