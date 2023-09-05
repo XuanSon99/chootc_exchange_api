@@ -29,7 +29,7 @@ class SellOrderController extends Controller
             $query->where('status', '=', $request->get('status'));
 
         if ($request->has('from') && $request->has('to'))
-            if($request->get('from') == $request->get('to'))
+            if ($request->get('from') == $request->get('to'))
                 $query->whereDate('created_at', Carbon::today());
             else
                 $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
@@ -131,8 +131,11 @@ class SellOrderController extends Controller
 
     public function updateAddress(Request $request)
     {
-        SellOrder::where('code', $request->code)->update(['customer_address' => $request->customer_address]);
-        
-        return response()->json(["status" => true], 200);
+        $order = SellOrder::where('code', $request->code)->first();
+
+        if (!$order->customer_address) {
+            SellOrder::where('code', $request->code)->update(['customer_address' => $request->customer_address]);
+            return response()->json(["status" => true], 200);
+        }
     }
 }

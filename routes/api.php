@@ -34,6 +34,7 @@ Route::post('sell-order', 'App\Http\Controllers\SellOrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
 Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
+Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
 
 Route::group([
     'middleware' => 'auth:api'
@@ -50,7 +51,6 @@ Route::group([
     Route::put('read-noti', 'App\Http\Controllers\NotificationController@readNotification');
     Route::get('read-all', 'App\Http\Controllers\NotificationController@readAll');
     Route::get('count-noti', 'App\Http\Controllers\NotificationController@CountNotification');
-    Route::put('update-address', 'App\Http\Controllers\SellOrderController@updateAddress');
     Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
     Route::get('ref-order', 'App\Http\Controllers\BuyOrderController@getOrderOfMember');
 });
