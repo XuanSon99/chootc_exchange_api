@@ -154,7 +154,7 @@ class AdminController extends Controller
     public function adminSell(Request $request)
     {
         $data = new BuyOrder([
-            'code' => "00000000",
+            'code' =>  $this->generateKey(),
             'status' => 1,
             'token' => $request->token,
             'amount' => $request->amount,
@@ -170,7 +170,7 @@ class AdminController extends Controller
     public function adminBuy(Request $request)
     {
         $data = new SellOrder([
-            'code' => "00000000",
+            'code' =>  $this->generateKey(),
             'status' => 1,
             'token' => $request->token,
             'amount' => $request->amount,
@@ -181,6 +181,15 @@ class AdminController extends Controller
         $data->save();
 
         return response()->json(["status" => true, "data" =>  $data], 201);
+    }
+
+    public function generateKey()
+    {
+        $key = "";
+        for ($x = 1; $x <= 8; $x++) {
+            $key .= random_int(0, 9);
+        }
+        return $key;
     }
 
 }
