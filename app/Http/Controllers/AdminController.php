@@ -156,10 +156,11 @@ class AdminController extends Controller
         $data = new BuyOrder([
             'code' =>  $this->generateKey(),
             'status' => 1,
+            'phone' => '0839575644',
             'token' => $request->token,
             'amount' => $request->amount,
             'money' => $request->money,
-            'fee' => $request->fee,
+            'blockchain_fee' => $request->blockchain_fee,
             'rate' => $request->rate
         ]);
         $data->save();
@@ -172,10 +173,11 @@ class AdminController extends Controller
         $data = new SellOrder([
             'code' =>  $this->generateKey(),
             'status' => 1,
+            'phone' => '0839575644',
             'token' => $request->token,
             'amount' => $request->amount,
             'money' => $request->money,
-            'fee' => $request->fee,
+            'blockchain_fee' => $request->blockchain_fee,
             'rate' => $request->rate
         ]);
         $data->save();
