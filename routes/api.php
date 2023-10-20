@@ -31,6 +31,7 @@ Route::group([
 Route::get('p2p', 'App\Http\Controllers\RateController@getPrice');
 Route::get('bank', 'App\Http\Controllers\RateController@getBankInfo');
 Route::post('sell-order', 'App\Http\Controllers\SellOrderController@addOrder');
+Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
 Route::resource('setup', 'App\Http\Controllers\SetupController');
 Route::get('asset', 'App\Http\Controllers\AssetController@index');
 Route::post('add-verify', 'App\Http\Controllers\VerifyController@addVerify');
@@ -51,7 +52,6 @@ Route::group([
     Route::put('read-noti', 'App\Http\Controllers\NotificationController@readNotification');
     Route::get('read-all', 'App\Http\Controllers\NotificationController@readAll');
     Route::get('count-noti', 'App\Http\Controllers\NotificationController@CountNotification');
-    Route::post('buy-order', 'App\Http\Controllers\BuyOrderController@addOrder');
     Route::get('ref-order', 'App\Http\Controllers\BuyOrderController@getOrderOfMember');
 });
 
