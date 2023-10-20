@@ -34,11 +34,11 @@ class BuyOrderController extends Controller
             $query->where('status', '=', $request->get('status'));
 
         if ($request->has('from') && $request->has('to'))
-            if($request->get('from') == $request->get('to'))
+            if ($request->get('from') == $request->get('to'))
                 $query->whereDate('created_at', Carbon::today());
             else
                 $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
-        
+
         $perPage = 10;
         if ($request->has('perPage'))
             $perPage = $request->get('perPage');
@@ -48,15 +48,15 @@ class BuyOrderController extends Controller
 
     public function addOrder(Request $request)
     {
-
-        $user = Client::where("phone", $request->phone)->first();
-
-        if($user->verify != 'success'){
-            return response()->json(["status" => false, "message" => ["Vui lòng KYC để thực hiện giao dịch mua"]], 400);
+        if ($request->amount > 110) {
+            $user = Client::where("phone", $request->phone)->first();
+            if (!$user || $user->verify != 'success') {
+                return;
+            }
         }
 
         $rate = $this->getPrice($request->token, 'buy');
-        
+
         if (is_null($rate)) {
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
         }
