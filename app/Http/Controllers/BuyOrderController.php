@@ -35,7 +35,7 @@ class BuyOrderController extends Controller
 
         if ($request->has('from') && $request->has('to'))
             if ($request->get('from') == $request->get('to'))
-                $query->whereDate('created_at', Carbon::today());
+                $query->whereDate('created_at', '=', $request->get('from'));
             else
                 $query->whereBetween('created_at', [$request->get('from'), $request->get('to')]);
 
