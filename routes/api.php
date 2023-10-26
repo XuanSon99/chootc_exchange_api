@@ -81,6 +81,8 @@ Route::group([
     Route::post('admin-sell', 'App\Http\Controllers\AdminController@adminSell');
     Route::post('admin-buy', 'App\Http\Controllers\AdminController@adminBuy');
 
+    Route::post('upload-file', 'App\Http\Controllers\AdminController@uploadFile');
+
     Route::group([
         'prefix' => 'search'
     ], function () {

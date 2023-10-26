@@ -194,4 +194,10 @@ class AdminController extends Controller
         return $key;
     }
 
+    public function uploadFile(Request $request)
+    {
+        $file = $request->file('file')->store('public/files');
+        return str_replace("public", "", $file);
+    }
+
 }
