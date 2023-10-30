@@ -67,7 +67,9 @@ class SellOrderController extends Controller
         ]);
         $data->save();
 
-        $chat_id = "-987421757";
+        // $chat_id = "-987421757";
+        $chat_id = "-4059917141";
+
         $text = "🔴 Bán " . $request->amount . " " . $request->token;
         $this->sendMessage($chat_id, $text);
 
