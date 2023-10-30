@@ -45,6 +45,7 @@ class SellOrderController extends Controller
     {
 
         $rate = $this->getPrice($request->token, 'sell');
+        $rate_fee = $this->getPrice('usdt', 'sell');
 
         if (is_null($rate)) {
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
@@ -56,7 +57,7 @@ class SellOrderController extends Controller
             'phone' => $request->phone,
             'token' => $request->token,
             'amount' => $request->amount,
-            'money' => $rate * $request->amount - $request->fee * $rate,
+            'money' => $rate * $request->amount - $request->fee * $rate_fee,
             'fee' => $request->fee * $rate,
             'rate' => $rate,
             'network' => $request->network,
