@@ -56,7 +56,11 @@ class BuyOrderController extends Controller
         }
 
         $rate = $this->getPrice($request->token, 'buy');
-        $rate_fee = $this->getPrice('usdt', 'buy');
+        $rate_fee = $rate;
+
+        if ($request->token != 'usdt') {
+            $rate_fee = $this->getPrice('usdt', 'buy');
+        }
 
         if (is_null($rate)) {
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
@@ -69,7 +73,7 @@ class BuyOrderController extends Controller
             'token' => $request->token,
             'amount' => $request->amount,
             'money' => $rate * $request->amount + $request->fee * $rate_fee,
-            'fee' => $request->fee * $rate,
+            'fee' => $request->fee * $rate_fee,
             'rate' => $rate,
             'network' => $request->network,
             'address' => $request->address
