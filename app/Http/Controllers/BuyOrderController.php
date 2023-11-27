@@ -110,7 +110,7 @@ class BuyOrderController extends Controller
             'merchantCheck' => true,
             'page' => 1,
             'publisherType' => null,
-            'rows' => 5,
+            'rows' => 10,
             'tradeType' => $type,
         ];
 
@@ -119,7 +119,7 @@ class BuyOrderController extends Controller
             'Accept' => 'application/json'
         ])->post($param, $data);
 
-        return $response['data'][4]['adv']['price'];
+        return $response['data'][7]['adv']['price'];
     }
 
     public function search(Request $request)
