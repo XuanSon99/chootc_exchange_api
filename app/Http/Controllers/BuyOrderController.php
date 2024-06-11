@@ -81,7 +81,7 @@ class BuyOrderController extends Controller
         $data->save();
 
         // $chat_id = "-987421757";
-        $chat_id = "-4059917141";
+        $chat_id = "-4221804578";
 
         $text = "🟢 Mua " . $request->amount . " " . $request->token;
         $this->sendMessage($chat_id, $text);
