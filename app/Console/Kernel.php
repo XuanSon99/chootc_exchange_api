@@ -72,7 +72,7 @@ class Kernel extends ConsoleKernel
             'Accept' => 'application/json'
         ])->post($param, $data);
 
-        return $response['data'][20]['adv']['price'];
+        return $response['data'][19]['adv']['price'];
     }
 
     /**
