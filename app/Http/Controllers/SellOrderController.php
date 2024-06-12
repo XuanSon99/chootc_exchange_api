@@ -55,10 +55,8 @@ class SellOrderController extends Controller
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
         }
 
-        if ($request->token == 'usdt' || $request->token == 'busd') {
-            if ($request->amount < 5000) {
-                $rate_fee = $rate + 100;
-            }
+        if ($request->amount < 5000) {
+            $rate_fee = $rate + 100;
         }
 
         $data = new SellOrder([
