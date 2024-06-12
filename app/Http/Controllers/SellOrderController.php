@@ -55,6 +55,12 @@ class SellOrderController extends Controller
             return response()->json(["status" => false, "message" => ["Đã xảy ra lỗi, vui lòng thử lại"]], 400);
         }
 
+        if ($request->token == 'usdt' || $request->token == 'busd') {
+            if ($request->amount < 5000) {
+                $rate_fee = $rate + 100;
+            }
+        }
+
         $data = new SellOrder([
             'code' => $this->generateKey(),
             'status' => 3,
@@ -101,7 +107,7 @@ class SellOrderController extends Controller
             'merchantCheck' => true,
             'page' => 1,
             'publisherType' => null,
-            'rows' => 10,
+            'rows' => 20,
             'tradeType' => $type,
         ];
 
@@ -110,7 +116,7 @@ class SellOrderController extends Controller
             'Accept' => 'application/json'
         ])->post($param, $data);
 
-        return $response['data'][7]['adv']['price'];
+        return $response['data'][20]['adv']['price'];
     }
 
     public function search(Request $request)

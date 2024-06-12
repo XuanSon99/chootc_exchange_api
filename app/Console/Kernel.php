@@ -63,7 +63,7 @@ class Kernel extends ConsoleKernel
             'merchantCheck' => true,
             'page' => 1,
             'publisherType' => null,
-            'rows' => 10,
+            'rows' => 20,
             'tradeType' => $type,
         ];
 
@@ -72,7 +72,7 @@ class Kernel extends ConsoleKernel
             'Accept' => 'application/json'
         ])->post($param, $data);
 
-        return $response['data'][7]['adv']['price'];
+        return $response['data'][20]['adv']['price'];
     }
 
     /**
