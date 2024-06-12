@@ -56,8 +56,8 @@ class SellOrderController extends Controller
         }
 
         if ($request->amount < 5000) {
-            $rate = $rate + 100;
-            $rate_fee = $rate_fee + 100;
+            $rate = $rate - 100;
+            $rate_fee = $rate_fee - 100;
         }
 
         $data = new SellOrder([
