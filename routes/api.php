@@ -61,11 +61,13 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AdminController@login');
 });
 
+Route::resource('admin', 'App\Http\Controllers\AdminController');
+
 Route::group([
     'middleware' => 'auth:admin',
     'prefix' => 'manage'
 ], function () {
-    Route::resource('admin', 'App\Http\Controllers\AdminController');
+    
     Route::get('user-info/{phone}', 'App\Http\Controllers\ClientController@getUserInfo');
     Route::get('info/{username}', 'App\Http\Controllers\AdminController@getInfo');
     Route::resource('client', 'App\Http\Controllers\ClientController');
