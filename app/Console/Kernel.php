@@ -40,11 +40,11 @@ class Kernel extends ConsoleKernel
         })->cron('*/10 * * * *');
 
         $schedule->call(function () {
-            DB::table('assets')->where('symbol','=','busd')->update([
-                'buy_rate' => $this->getPrice('busd','buy'),
-                'sell_rate' => $this->getPrice('busd','sell'),
-                "updated_at" => now()
-            ]);
+            // DB::table('assets')->where('symbol','=','busd')->update([
+            //     'buy_rate' => $this->getPrice('busd','buy'),
+            //     'sell_rate' => $this->getPrice('busd','sell'),
+            //     "updated_at" => now()
+            // ]);
             DB::table('assets')->where('symbol','=','bnb')->update([
                 'buy_rate' => $this->getPrice('bnb','buy'),
                 'sell_rate' => $this->getPrice('bnb','sell'),
