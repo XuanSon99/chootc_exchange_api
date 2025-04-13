@@ -55,7 +55,7 @@ class Kernel extends ConsoleKernel
     
     public function getPrice($asset, $type)
     {
-        $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
+        $param = 'https://c2c.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
         
         $data = [
             'asset' => $asset,
