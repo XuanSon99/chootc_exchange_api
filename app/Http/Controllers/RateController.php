@@ -16,12 +16,12 @@ class RateController extends Controller
         $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
         
         $data = [
-            'asset' => $request->asset,
-            'fiat' => $request->fiat,
+            'asset' => 'USDT',
+            'fiat' => 'VND',
             'page' => 1,
             'publisherType' => null,
             'rows' => 20,
-            'tradeType' => $request->type,
+            'tradeType' => 'BUY',
         ];
 
         $response = Http::withHeaders([
