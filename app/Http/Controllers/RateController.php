@@ -13,7 +13,7 @@ class RateController extends Controller
 {
     public function getPrice(Request $request)
     {
-        $param = 'https://c2c.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
+        $param = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search';
         
         $data = [
             'asset' => $request->asset,
