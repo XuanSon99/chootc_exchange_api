@@ -92,3 +92,10 @@ Route::group([
         Route::get('sell-order', 'App\Http\Controllers\SellOrderController@search');
     });
 });
+
+Route::resource('voting', 'App\Http\Controllers\VotingController');
+Route::get('isadmin/{username}', 'App\Http\Controllers\AdminteleController@isAdmin');
+Route::get('votings/{username}', 'App\Http\Controllers\VotingController@getInfo');
+
+Route::post('update-rep', 'App\Http\Controllers\VotingController@updateRep');
+Route::post('add-user', 'App\Http\Controllers\VotingController@addUser');
